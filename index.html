@@ -106,6 +106,42 @@
       })()
     </script>
   </head>
+  <script>
+// === GESTION DE LA VARIABLE PRÉNOM ===
+
+function demanderPrenom() {
+    let prenom = localStorage.getItem('etwinning_prenom');
+    
+    if (!prenom) {
+        prenom = prompt("Bonjour ! Comment t'appelles-tu ?");
+        if (prenom && prenom.trim() !== '') {
+            prenom = prenom.trim();
+            localStorage.setItem('etwinning_prenom', prenom);
+        } else {
+            prenom = "Apprenti magicien";
+        }
+    }
+    
+    return prenom;
+}
+
+const prenomEleve = demanderPrenom();
+
+function messagePersonnalise(message) {
+    return message.replace('[prénom]', prenomEleve);
+}
+
+function reinitialiserPrenom() {
+    localStorage.removeItem('etwinning_prenom');
+    location.reload();
+}
+
+// Exemple d'utilisation au chargement de la page
+document.addEventListener('DOMContentLoaded', function() {
+    console.log('Bienvenue ' + prenomEleve + ' !');
+    // Ajoute ici d'autres personnalisations
+});
+</script>
   <body>
     <div id="app"></div>
     <script type="text/javascript">
